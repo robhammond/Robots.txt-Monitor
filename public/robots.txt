@@ -1,0 +1,4 @@
+user-agent: foo
+disallow: bar
+allow: worlds
+sitemap: blah

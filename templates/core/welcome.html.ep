@@ -1,0 +1,62 @@
+% layout 'default';
+% title 'Welcome';
+<h2>Dashboard</h2>
+% if (flash 'msg') {
+	<div class="row">
+		<div class="col-sm-12">
+			%= flash 'msg'
+		</div>
+	</div>
+% }
+<div class="row">
+	<div class="col-sm-12">
+		<p><a href="/add" class="btn btn-success pull-right">+ Add site(s)</a><br><br></p>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12">
+		<table class="table table-bordered table-hover table-condensed table-striped">
+			<thead>
+				<tr>
+					<th>Protocol</th>
+					<th>Host</th>
+					<th>Last changed</th>
+					<th>Last checked</th>
+					<th>HTTP Status</th>
+					<th>Active?</th>
+					<th> </th>
+				</tr>
+			</thead>
+			<tbody>
+				% for my $m (@$monitors) {
+					<tr>
+						<td><%= $m->{'protocol'} %></td>
+						<td><a href="/view?id=<%= $m->{'_id'} %>"><%= $m->{'host'} %></a></td>
+						<td>
+							% if ($m->{'changes'}->[0]->{'time'}) {
+								%= DateTime->from_epoch(epoch => $m->{'changes'}->[0]->{'time'})->format_cldr("yyyy-MM-dd HH:mm:ss Z")
+							% }
+						</td>
+						<td>
+							% if ($m->{'last_checked'}) {
+								%= DateTime->from_epoch(epoch => $m->{'last_checked'})->format_cldr("yyyy-MM-dd HH:mm:ss Z")
+							% }
+						</td>
+						<td><%= $m->{'http_status'} %></td>
+						<td>
+							% if ($m->{'active'} eq 'True') {
+								<i class="fa fa-check" style="color:green"></i>
+							% } else {
+								<i class="fa fa-times" style="color:red"></i>
+							% }
+						</td>
+						<td>
+							<a href="/active?id=<%= $m->{'_id'} %>&amp;power=<%= $m->{'active'} %>" class="btn btn-xs"><i class="fa fa-power-off"></i></a>
+							<a href="/delete?id=<%= $m->{'_id'} %>" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
+						</td>
+					</tr>
+				% }
+			</tbody>
+		</table>
+	</div>
+</div>

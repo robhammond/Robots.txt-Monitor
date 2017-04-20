@@ -1,0 +1,63 @@
+% layout 'default';
+% title 'Add site(s)';
+<h2>Add site(s)</h2>
+<div role="tabpanel">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+            <a href="#single" aria-controls="single" role="tab" data-toggle="tab">Single domain</a>
+        </li>
+        <li role="presentation">
+            <a href="#multi" aria-controls="multi" role="tab" data-toggle="tab">Multiple domains</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="single">
+        	<div class="row">
+        		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+	        		<br>
+	        		<p>Add a single domain to track</p>
+        			<form action="/save" method="POST" class="form-inline" role="form">
+						<div class="form-group">
+							%= label_for protocol => 'Protocol', class => 'sr-only'
+							%= select_field 'protocol' => ['http', 'https'], class => 'form-control'
+						</div>
+						<div class="form-group">
+							%= label_for host => 'host', class => 'sr-only'
+							%= text_field 'host', class => 'form-control', placeholder => 'www.example.com'
+						</div>
+						<div class="form-group">
+							<div class="col-sm-10 col-sm-offset-2">
+								<button type="submit" class="btn btn-primary">Save</button>
+							</div>
+						</div>
+					</form>
+        		</div>
+        	</div>
+        	
+        </div>
+        <div role="tabpanel" class="tab-pane" id="multi">
+	        <div class="row">
+        		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+	        		<br>
+	        		<p>Add multiple URLs to track</p>
+		        	<form action="/save-multi" method="POST" class="form-horizontal" role="form">
+						<div class="form-group">
+							%= label_for urls => 'URLs', class => 'sr-only'
+							%= text_area 'urls', class => 'form-control', placeholder => "http://w1.example.com/\nhttp://w2.example.com\nhttps://example.com", rows => 5
+						</div>
+						<div class="form-group">
+							<div class="col-sm-10">
+								<button type="submit" class="btn btn-primary">Save</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+        </div>
+    </div>
+</div>
+
+</form>

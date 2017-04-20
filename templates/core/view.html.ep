@@ -1,0 +1,40 @@
+% layout 'default';
+% title 'View';
+<h2>View history</h2>
+
+% if (flash 'msg') {
+	<div class="row">
+		<div class="col-sm-12">
+			%= flash 'msg'
+		</div>
+	</div>
+% }
+
+<table class="table table-hover">
+	<tr>
+		<th>URL</th>
+		<td><a href="<%= $doc->{'robots_url'} %>"><%= $doc->{'robots_url'} %></a></td>
+	</tr>
+</table>
+<div class="row">
+	<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+		<table class="table table-bordered table-hover table-condensed table-striped">
+			<thead>
+				<tr>
+					<th>Updated</th>
+					<th>View change</th>
+					<th>HTTP Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				% for my $row (@{$doc->{'changes'}}) {
+					<tr>
+						<td><%= DateTime->from_epoch(epoch => $row->{'time'})->format_cldr("yyyy-MM-dd HH:mm:ss Z") %></td>
+						<td><a href="/version?id=<%= $doc->{'_id'} %>&amp;commit_id=<%= $row->{'commit_id'} %>">View</a></td>
+						<td><%= $row->{'http_status'} %></td>
+					</tr>
+				% }
+			</tbody>
+		</table>		
+	</div>
+</div>

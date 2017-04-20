@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= title %></title>
+	<script src="/js/jquery-3.2.1.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+	<a class="sr-only" href="#content">Skip to content</a>
+	<div class="navbar">
+		<a class="navbar-brand" href="/">Robots Monitor</a>
+		<ul class="nav navbar-nav">
+			<li>
+				<a href="/">Home</a>
+			</li>
+		</ul>
+	</div>
+	<div class="container" id="content">
+		<div class="row">
+			<%= content %>
+		</div>
+	</div>
+</body>
+</html>

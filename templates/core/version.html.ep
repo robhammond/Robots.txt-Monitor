@@ -1,0 +1,33 @@
+% layout 'default';
+% title 'Version';
+<h2>Version</h2>
+<div class="row">
+	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+		<table class="table table-hover table-bordered table-condensed table-striped">
+			<tr>
+				<th>URL</th>
+				<td><a href="<%= $doc->{'robots_url'} %>"><%= $doc->{'robots_url'} %></a></td>
+			</tr>
+			<tr>
+				<th>Date Changed</th>
+				<td><%= DateTime->from_epoch(epoch => $details->{'time'})->format_cldr("yyyy-MM-dd HH:mm:ss Z") %></td>
+			</tr>
+			<tr>
+				<th>Compare with</th>
+				<td>
+					<form action="/compare">
+						%= hidden_field 'id' => param 'id'
+						%= hidden_field 'robots1' => param 'commit_id'
+						%= select_field 'robots2' => $compare, onchange => 'this.form.submit();'
+					</form>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+		<pre><%= $robots %></pre>
+	</div>
+</div>
