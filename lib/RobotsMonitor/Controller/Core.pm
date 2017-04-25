@@ -3,7 +3,6 @@ use Mojo::Base 'Mojolicious::Controller';
 use Mojo::Log;
 use DateTime;
 use FindBin qw($Bin);
-use URI::Split qw(uri_split);
 use RobotsMonitor::Functions::Common qw(build_robots_url build_local_fn);
 
 my $log = Mojo::Log->new;
